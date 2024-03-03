@@ -100,37 +100,17 @@ public:
         return seasonCount;
     }
 
-    int getEpisodeCount(int seasonNumber) const {
-        if (seasonNumber >= 1 && seasonNumber <= seasonCount){
-            return episodeCount[seasonNumber - 1];
-        } else {
-            return -1; //Error handling
-        }
+    int getEpisodeCount() const{
+        return episodeCount;
     }
 
-    void selectEpisode(int seasonNumber, int episodeNumber) {
-        if (seasonNumber >= 1 && seasonNumber <= seasonCount && episodeNumber >= 1 && episodeNumber <= episodeCount[seasonNumber - 1]) {
-            cout << "Selected Season " << seasonNumber << ", Episode " << episodeNumber << endl;
-        } else {
-            cout << "Invalid season or episode number." << endl;
-        }
-    }
+    void selectEpisode(int seasonNumber, int episodeNumber) {}
 
-    void selectSeason(int seasonNumber) {
-        if (seasonNumber >= 1 && seasonNumber <= seasonCount) {
-            cout << "Selected Season " << seasonNumber << endl;
-        } else {
-            cout << "Invalid season number." << endl;
-        }
-    }
+    void selectSeason(int seasonNumber) {}
 
-    void selectShow() {
-        cout << "Selected the TV show." << endl;
-    }
+    void selectShow() {}
 
-    void watchShowLater(){
-        cout << "Added the TV show to watch later list." << endl;
-    }
+    void watchShowLater() {}
 };
 
 class Plan {
@@ -143,23 +123,10 @@ public:
     Plan(float price, const vector<string>& planOptions, bool available)
         : price(price), planOptions(planOptions), available(available) {}
 
-    void displayPlan(string planName){
-        cout << "Plan: " << planName << endl;
-        cout << "Price: £" << price << endl;
-        cout << "Options: ";
-        for (const auto& option : planOptions){
-            cout << option << " ";
-        }
-        cout << endl;
-        cout << "Availability: " << (available ? "Available" : "Discontinued") << endl;
-    }
+    void displayPlan(string planName){}
 
-    float totalPrice(int subscriptionDuration) {
-        return price * subscriptionDuration;
-    }
+    float totalPrice(int subscriptionDuration) {}
 
-    bool isAvailable(){
-        return available;
-    }
+    bool isAvailable(){}
 };
 #endif
