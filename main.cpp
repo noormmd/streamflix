@@ -46,6 +46,9 @@ bool userExists(const string& username, const string& password) {
 return false;
 }
 
+// Function to check if the user exist and to make sure the password is correct
+bool userExist (const string& username, const string& password){
+}
 //Function to perform user login
 void loginUser(const string& username, const string& password) {
   if (userExists(username, password)) {
@@ -54,6 +57,18 @@ void loginUser(const string& username, const string& password) {
       cout << "Invalid username or password. Please try again." << endl;
   }
 }
+
+int main() {
+string inputUsername, inputPassword;
+cout << "Enter username: ";
+cin >> inputUsername;
+
+cout << "Enter password: ";
+cin >> inputPassword;
+loginUser(inputUsername, inputPassword);
+return 0;
+}
+
 
 int main() {
   bool running = true;
