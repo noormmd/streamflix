@@ -10,11 +10,11 @@ using namespace std;
 //Function to perform user registration
 void registerUser(const string& username, const string& email, const string& password) {
   //Open the users.csv file
-  ofstream file("users.xlsx", ios::app);
+  ofstream file("users.csv", ios::app);
   if (file.is_open()) {
     //Write user information to file
     file << username << "," << email << "," << password << endl;
-    file.close():
+    file.close();
     cout << "User registered successfully!" << endl;
   } else {
     cout << "Error: Unable to open file." << endl;
@@ -24,7 +24,7 @@ void registerUser(const string& username, const string& email, const string& pas
 //Function to check if a user exists in the CSV file
 bool userExists(const string& username, const string& password) {
   //Open the users.xlsx file
-  ifstream file("users.xlsx");
+  ifstream file("users.csv");
   if (file.is_open()) {
     string line;
     //Read each line in the file
@@ -41,7 +41,7 @@ bool userExists(const string& username, const string& password) {
         return true;
       }
     }
-    file.close():
+    file.close();
 }
 return false;
 }
