@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "Movies.h">
+#include "Movies.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ void registerUser(const string& username, const string& email, const string& pas
 
 //Function to check if a user exists in the CSV file
 bool userExists(const string& username, const string& password) {
-  //Open the users.xlsx file
+  //Open the users.csv file
   ifstream file("users.csv");
   if (file.is_open()) {
     string line;
@@ -32,9 +32,9 @@ bool userExists(const string& username, const string& password) {
       stringstream ss(line);
       string storedUsername, storedEmail, storedPassword;
       //Parse the lines into username, email and password
-      getLine(ss, storedUsername, ",");
-      getLine(ss, storedEmail, ",");
-      getLine(ss, storedPassword, ",");
+      getline(ss, storedUsername, ',');
+      getline(ss, storedEmail, ',');
+      getline(ss, storedPassword, ',');
       //Check if username and password match
       if (storedUsername == username && storedPassword == password) {
         file.close();
@@ -46,9 +46,6 @@ bool userExists(const string& username, const string& password) {
 return false;
 }
 
-// Function to check if the user exist and to make sure the password is correct
-bool userExist (const string& username, const string& password){
-}
 //Function to perform user login
 void loginUser(const string& username, const string& password) {
   if (userExists(username, password)) {
@@ -57,18 +54,6 @@ void loginUser(const string& username, const string& password) {
       cout << "Invalid username or password. Please try again." << endl;
   }
 }
-
-int main() {
-string inputUsername, inputPassword;
-cout << "Enter username: ";
-cin >> inputUsername;
-
-cout << "Enter password: ";
-cin >> inputPassword;
-loginUser(inputUsername, inputPassword);
-return 0;
-}
-
 
 int main() {
   bool running = true;

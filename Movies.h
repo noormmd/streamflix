@@ -101,7 +101,7 @@ public:
     }
 
     int getEpisodeCount() const{
-        return episodeCount;
+        return episodeCount.size(); //We want to return the total number of episodes
     }
 
     void selectEpisode(int seasonNumber, int episodeNumber) {}
@@ -125,8 +125,12 @@ public:
 
     void displayPlan(string planName){}
 
-    float totalPrice(int subscriptionDuration) {}
+    float totalPrice(int subscriptionDuration) {
+        return price * subscriptionDuration;
+    }
 
-    bool isAvailable(){}
+    bool isAvailable(){
+        return available;
+    }
 };
 #endif
