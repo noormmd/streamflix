@@ -1,5 +1,5 @@
-#ifndef USER_H
-#define USER_H
+#ifndef USERS_H
+#define USERS_H
 #include <iostream>
 #include <fstream>
 #include <sstream>
