@@ -46,10 +46,3 @@ public:
 
 #endif
 
-
-    void choosePlan(string plan) {
-        selectedPlan = plan;
-    }
-};
-
-end if
