@@ -87,32 +87,6 @@ public:
     }
 };
 
-class TVShow {
-private:
-    int seasonCount;
-    vector<int> episodeCount;
-
-public:
-    TVShow(int seasonCount, const vector<int>& episodeCount)
-        : seasonCount(seasonCount), episodeCount(episodeCount) {}
-    
-    int getSeasonCount() const {
-        return seasonCount;
-    }
-
-    int getEpisodeCount() const{
-        return episodeCount.size(); //We want to return the total number of episodes
-    }
-
-    void selectEpisode(int seasonNumber, int episodeNumber) {}
-
-    void selectSeason(int seasonNumber) {}
-
-    void selectShow() {}
-
-    void watchShowLater() {}
-};
-
 class Plan {
 private:
     float price;
