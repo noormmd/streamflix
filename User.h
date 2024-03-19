@@ -1,9 +1,20 @@
+#ifndef USER_H
+#define USER_H
+#incude <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
 class User {
 private:
     string username;
     string email;
     string password;
     string selectedPlan;
+
 public:
     User(string username, string email, string password)
         : username(username), email(email), password(password){}
@@ -30,7 +41,11 @@ public:
 
     void login() {
         //function to log user in streamflix
-    }
+        
+    };
+
+#endif
+
 
     void choosePlan(string plan) {
         selectedPlan = plan;
