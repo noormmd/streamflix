@@ -2,12 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <vector>
-#include <algorithm> // for std::swap
+#include <unordered_map>
 
 using namespace std;
-
-//joshua code
 
 // Structure for TV show
 struct TVShow {
@@ -22,48 +19,6 @@ struct TVShow {
         name(name), genre(genre), language(language), releaseYear(releaseYear), season(season) {}
 };
 
-// Function to partition the TV shows array for Quick Sort
-int partition(vector<TVShow>& shows, int low, int high) {
-    string pivot = shows[high].name; // Selecting the last element as the pivot
-    int i = low - 1; // Index of smaller element
-
-    for (int j = low; j < high; j++) {
-        // If current element is smaller than or equal to pivot
-        if (shows[j].name <= pivot) {
-            i++;
-            swap(shows[i], shows[j]);
-        }
-    }
-    swap(shows[i + 1], shows[high]);
-    return i + 1;
-}
-
-// Quick Sort algorithm for sorting TV shows based on name
-void quickSort(vector<TVShow>& shows, int low, int high) {
-    if (low < high) {
-        int pi = partition(shows, low, high);
-        quickSort(shows, low, pi - 1);
-        quickSort(shows, pi + 1, high);
-    }
-}
-
-// Function to search for a specific TV show based on name using binary search
-int binarySearch(const vector<TVShow>& shows, const string& target) {
-    int low = 0;
-    int high = shows.size() - 1;
-
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
-        if (shows[mid].name == target)
-            return mid;
-        else if (shows[mid].name < target)
-            low = mid + 1;
-        else
-            high = mid - 1;
-    }
-    return -1; // Not found
-}
-
 int main() {
     // Read TV shows data from the CSV file
     ifstream file("tv-shows.csv");
@@ -72,7 +27,8 @@ int main() {
         return 1;
     }
 
-    vector<TVShow> tvShows;
+    // Define a hash table to store TV shows
+    unordered_map<string, TVShow> tvShows;
 
     string line;
     getline(file, line); // Skip header line
@@ -86,49 +42,40 @@ int main() {
         getline(ss, seasonStr, ',');
 
         // Convert string to integer
-        // int releaseYear = stoi(releaseYearStr);
-        // int season = stoi(seasonStr);
+        int releaseYear, season;
+        try {
+            if (!releaseYearStr.empty() && !seasonStr.empty()) {
+                releaseYear = stoi(releaseYearStr);
+                season = stoi(seasonStr);
+            } else {
+                cerr << "Error: Empty value encountered for release year or season." << endl;
+                continue; // Skip this line and move to the next one
+            }
+        } catch (const std::invalid_argument& e) {
+            cerr << "Error: Invalid integer value encountered in CSV." << endl;
+            continue; // Skip this line and move to the next one
+        }
 
-         int releaseYear, season;
-try {
-    cout << "releaseYearStr: " << releaseYearStr << endl;
-    cout << "seasonStr: " << seasonStr << endl;
-    if (!releaseYearStr.empty() && !seasonStr.empty()) {
-        releaseYear = stoi(releaseYearStr);
-        season = stoi(seasonStr);
-    } else {
-        cerr << "Error: Empty value encountered for release year or season." << endl;
-        continue; // Skip this line and move to the next one
-    }
-} catch (const std::invalid_argument& e) {
-    cerr << "Error: Invalid integer value encountered in CSV." << endl;
-    continue; // Skip this line and move to the next one
-}
-
-        // Create a TVShow object and add it to the vector
+        // Create a TVShow object and add it to the hash table
         TVShow show(name, genre, language, releaseYear, season);
-        tvShows.push_back(show);
+        tvShows[name] = show;
     }
     file.close();
-
-    // Sort TV shows based on name
-    quickSort(tvShows, 0, tvShows.size() - 1);
 
     // Prompt user to enter the name of the TV show to search for
     cout << "Enter the name of the TV show to search for: ";
     string searchTerm;
     getline(cin, searchTerm);
 
-    // Perform binary search to find the TV show
-    int index = binarySearch(tvShows, searchTerm);
-    if (index != -1) {
-        cout << "TV Show found at index: " << index << endl;
-        cout << "Details:" << endl;
-        cout << "Name: " << tvShows[index].name << endl;
-        cout << "Genre: " << tvShows[index].genre << endl;
-        cout << "Language: " << tvShows[index].language << endl;
-        cout << "Release Year: " << tvShows[index].releaseYear << endl;
-        cout << "Season: " << tvShows[index].season << endl;
+    // Search for the TV show in the hash table
+    auto it = tvShows.find(searchTerm);
+    if (it != tvShows.end()) {
+        cout << "TV Show found: " << endl;
+        cout << "Name: " << it->second.name << endl;
+        cout << "Genre: " << it->second.genre << endl;
+        cout << "Language: " << it->second.language << endl;
+        cout << "Release Year: " << it->second.releaseYear << endl;
+        cout << "Season: " << it->second.season << endl;
     } else {
         cout << "TV Show not found." << endl;
     }
