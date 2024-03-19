@@ -1,6 +1,6 @@
 #ifndef USER_H
 #define USER_H
-#incude <iostream>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
