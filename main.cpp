@@ -5,6 +5,8 @@
 #include <vector>
 #include "Movies.h"
 #include "TVshows.h"
+#include "Users.h"
+#include "Plan.h"
 
 using namespace std;
 
