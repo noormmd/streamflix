@@ -8,7 +8,8 @@
 
 using namespace std;
 
-class Movie {
+class Movie
+{
 private:
     int movieDuration;
     int movieID;
@@ -46,6 +47,16 @@ public:
     {
         return movieDuration;
     }
+      string getMovieGenre() const {
+        return movieGenre;
+    }
+    
+    void printDetails() const {
+        cout << "Movie ID: " << getMovieID() << endl
+             << "Movie Name: " << getMovieName() << endl
+             << "Genre: " << getMovieGenre() << endl
+             << "Starring: " << getActorFirst() << " " << getActorLast() << endl
+             << "Duration: " << getMovieDuration() << " minutes" << endl;
+    }
 };
-
 #endif
