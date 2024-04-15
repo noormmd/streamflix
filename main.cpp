@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <regex> // Regex library for email validation
 #include <string>
 #include <vector>
 #include "Movies.h"
@@ -9,6 +10,13 @@
 #include "Plan.h"
 
 using namespace std;
+
+// Function to validate email format
+bool isValidEmail(const string& email) {
+    // Regular expression for basic email validation
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    return regex_match(email, pattern);
+}
 
 //Function to perform user registration
 void registerUser(const string& username, const string& email, const string& password) {
@@ -133,9 +141,24 @@ int main() {
                     displayPlanDetails(selectedPlan);
                     if (selectedPlan == "1") {
                         // Limit access to basic plan content
-                        // e.g. display only a selection of titles OR limit to only movies/tv shows
+                        // e.g. display only a selection of titles OR limit to only movies
+              cout << "You have chosen Plan 1 (Basic Plan), for limited access to movies and TV shows" << endl;
+      
+                        // Functionality to choose a movie from only movies
+                        cout << "------------------------------------" << endl;
+                        cout << "Select a movie from the following to watch:" << endl;
+          cout << "------------------------------------" << endl;
+          // FUNCTIONALITY TO DISPLAY MOVIES
+
                     } else {
                         // Or give full access for premium plan
+                           cout << "You have chosen Plan 2 (Premium Plan), for access to all movies and TV shows" << endl;
+      
+                        // Functionality to choose any movie or TV show from wider range
+                        cout << "------------------------------------" << endl;
+                        cout << "Select a movie or TV show from the following to watch:" << endl;
+          cout << "------------------------------------" << endl;
+          // FUNCTIONALITY TO DISPLAY TV SHOWS AND MOVIES
                     }
                 }
           break;
