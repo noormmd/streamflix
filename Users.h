@@ -35,13 +35,7 @@ public:
         selectedPlan = plan;
     }
 
-    void registerUser() {
-        //function to register user
-    }
 
-    void login() {
-        //function to log user in streamflix
-        
-    };
+};
 
 #endif

@@ -58,6 +58,34 @@ void loginUser(const string& username, const string& password) {
   }
 }
 
+// Function to display plan options and let the user choose
+string selectPlan() {
+    cout << "\nSelect a plan:" << endl;
+    cout << "1. Basic Plan (Limited access to movies and TV shows)" << endl;
+    cout << "2. Premium Plan (Full access to movies and TV shows)" << endl;
+    cout << "Enter your choice (1 or 2): ";
+    string choice;
+    cin >> choice;
+    while (choice != "1" && choice != "2") {
+        cout << "Invalid choice. Please enter 1 or 2: ";
+        cin >> choice;
+    }
+    return choice;
+}
+
+// Function to display plan details
+void displayPlanDetails(const string& plan) {
+    if (plan == "1") {
+        cout << "\nBasic Plan Details:" << endl;
+        cout << "- Limited access to movies and TV shows." << endl;
+        cout << "- Access to a handpicked selection of popular titles." << endl;
+    } else {
+        cout << "\nPremium Plan Details:" << endl;
+        cout << "- Full access to all movies and TV shows." << endl;
+        cout << "- Access to a wider range of content and all movies and TV shows of choice." << endl;
+    }
+}
+
 int main() {
   bool running = true;
   while (running) {
@@ -85,6 +113,19 @@ int main() {
           cout << "Enter password: ";
           cin >> password;
           loginUser(username, password);
+          // If user exists limit access to movies and TV shows based on selected plan function
+           if (userExists(username, password)) {
+                    string selectedPlan = selectPlan();
+                    User user(username, email, password);
+                    user.setSelectedPlan(selectedPlan);
+                    displayPlanDetails(selectedPlan);
+                    if (selectedPlan == "1") {
+                        // Limit access to basic plan content
+                        // e.g. display only a selection of titles OR limit to only movies/tv shows
+                    } else {
+                        // Or give full access for premium plan
+                    }
+                }
           break;
         case 3:
           running = false;
