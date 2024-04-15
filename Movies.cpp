@@ -29,14 +29,14 @@ string trim(const string& str) {
 }
 
 // Function to read movie data from a CSV file
-unordered_map<string, Movie> readMoviesFromCSV(const string& filename) {
-    unordered_map<string, Movie> movies;
-
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cerr << "Error opening file: " << filename << endl;
+int main( {
+    ifstream file ("Movies.csv");
+    if (!file.is_open()){
+        cerr <<"Error opening file." << filename << end1;
         return movies;
     }
+
+    unordered_map<string, Movie> movies;
 
     string line;
     while (getline(file, line)) {
@@ -63,9 +63,11 @@ unordered_map<string, Movie> readMoviesFromCSV(const string& filename) {
         }
     }
 
+
     file.close();
     return movies;
-}
+
+})
 
 //  a function to search for movies by title in a hash map
 void searchByTitle(const unordered_map<string, Movie>& movies, const string& title) {
@@ -109,7 +111,7 @@ void searchByGenre(const unordered_map<string, Movie>& movies, const string& gen
 
 int main() {
     // Read movies from CSV file
-    unordered_map<string, Movie> movies = readMoviesFromCSV("movies.csv");
+    unordered_map<string, Movie> movies = readMoviesFromCSV("Movies.csv");
 
     // Prompt user to choose search criteria
     cout << "Choose search criteria:" << endl;
