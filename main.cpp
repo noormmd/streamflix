@@ -60,7 +60,9 @@ void loginUser(const string& username, const string& password) {
 
 // Function to display plan options and let the user choose
 string selectPlan() {
+    cout << "------------------------------------" << endl;
     cout << "\nSelect a plan:" << endl;
+    cout << "------------------------------------" << endl;
     cout << "1. Basic Plan (Limited access to movies and TV shows)" << endl;
     cout << "2. Premium Plan (Full access to movies and TV shows)" << endl;
     cout << "Enter your choice (1 or 2): ";
@@ -76,11 +78,15 @@ string selectPlan() {
 // Function to display plan details
 void displayPlanDetails(const string& plan) {
     if (plan == "1") {
+        cout << "------------------------------------" << endl;
         cout << "\nBasic Plan Details:" << endl;
+        cout << "------------------------------------" << endl;
         cout << "- Limited access to movies and TV shows." << endl;
         cout << "- Access to a handpicked selection of popular titles." << endl;
     } else {
+        cout << "------------------------------------" << endl;
         cout << "\nPremium Plan Details:" << endl;
+        cout << "------------------------------------" << endl;
         cout << "- Full access to all movies and TV shows." << endl;
         cout << "- Access to a wider range of content and all movies and TV shows of choice." << endl;
     }
@@ -89,16 +95,21 @@ void displayPlanDetails(const string& plan) {
 int main() {
   bool running = true;
   while (running) {
-    cout << "Menu:" << endl;
-    cout << "1. Register" << endl;
-    cout << "2. Login" << endl;
-    cout << "3. Exit" << endl;
-    cout << "Choose an option: ";
+    cout << "      WELCOME TO STREAMFLIX" << endl;
+    cout << "************************************" << endl;
+    cout << "*           MAIN MENU              *" << endl;
+    cout << "************************************" << endl;
+    cout << "| 1. Register                     |" << endl;
+    cout << "| 2. Login                        |" << endl;
+    cout << "| 3. Exit                         |" << endl;
+    cout << "************************************" << endl;
+    cout << "Choose an option from the above\nby typing the corresponding number." << endl;
     int choice;
     cin >> choice;
     string username, email, password;
     switch (choice) {
         case 1:
+          cout << "------------------------------------" << endl;
           cout << "Enter username: ";
           cin >> username;
           cout << "Enter email: ";
@@ -108,6 +119,7 @@ int main() {
           registerUser(username, email, password);
           break;
         case 2: 
+          cout << "------------------------------------" << endl;
           cout << "Enter username: ";
           cin >> username;
           cout << "Enter password: ";
