@@ -176,6 +176,11 @@ string filename;
           cout << "Select a movie from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY MOVIES
+
+           // After displaying ask whether user would like to search for a movie
+          cout << "Looking for a particular movie? Search:" << endl;
+          cout << "Type the category you'd like to search for " << endl;
+
         }
         else
         {
@@ -188,6 +193,12 @@ string filename;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY TV SHOWS AND MOVIES
           //readShowsFromCSV(filename);
+
+          // After displaying ask whether user would like to search for a TV show
+          cout << "Looking for a particular show? Search:" << endl;
+          cout << "Type the category you'd like to search for " << endl;
+
+
         }
       }
       break;
