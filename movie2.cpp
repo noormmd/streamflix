@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -29,18 +28,11 @@ string trim(const string& str) {
     return str.substr(first, (last - first + 1));
 }
 
-// Function to read movie data from a CSV file
-unordered_map<string, Movie> readMoviesFromCSV(const string& filename) {
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cerr << "Error opening file." << endl;
-        exit(1);
-    }
-
+// Function to read movie data from a vector of strings (simulating a CSV file)
+unordered_map<string, Movie> readMoviesFromVector(const vector<string>& data) {
     unordered_map<string, Movie> movies;
 
-    string line;
-    while (getline(file, line)) {
+    for (const string& line : data) {
         stringstream ss(line);
         vector<string> tokens;
         string token;
@@ -64,7 +56,6 @@ unordered_map<string, Movie> readMoviesFromCSV(const string& filename) {
         }
     }
 
-    file.close();
     return movies;
 }
 
@@ -87,9 +78,15 @@ bool compareByReleaseYear(const Movie& a, const Movie& b) {
     return a.releaseYear > b.releaseYear; // Sort in descending order
 }
 
-// Main function to drive the program
 int main() {
-    unordered_map<string, Movie> movies = readMoviesFromCSV("Movies.csv");
+    vector<string> csvData = {
+        "The Shawshank Redemption,Drama,English,Tim,Robbins,142,1994",
+        "The Godfather,Drama,English,Marlon,Brando,175,1972",
+        "The Dark Knight,Action,English,Christian,Bale,152,2008",
+        "12 Angry Men,Drama,English,Henry,Fonda,96,1957"
+    };
+
+    unordered_map<string, Movie> movies = readMoviesFromVector(csvData);
 
     // Converting unordered_map to vector to sort
     vector<Movie> movieList;
