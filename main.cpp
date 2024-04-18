@@ -119,8 +119,17 @@ void displayPlanDetails(const string &plan)
   }
 }
 
-int main()
-{
+
+
+int main() {
+string filename;
+
+// Enables user to independantly input CSV data file name to be used in accessing movies and TV shows
+  cout << "Enter the data file name to access movies and TV shows" << endl;
+  cin >> filename;
+  cin.ignore();
+
+
   bool running = true;
   while (running)
   {
@@ -184,6 +193,7 @@ int main()
           cout << "Select a movie or TV show from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY TV SHOWS AND MOVIES
+          readShowsFromCSV(filename);
         }
       }
       break;
