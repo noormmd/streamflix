@@ -18,7 +18,7 @@ public:
     Plan(float price, const vector<string>& planOptions, bool available)
         : price(price), planOptions(planOptions), available(available) {}
 
-    void displayPlan(string planName){}
+   // void displayPlan(string planName){}
 
     float totalPrice(int subscriptionDuration) {
         return price * subscriptionDuration;

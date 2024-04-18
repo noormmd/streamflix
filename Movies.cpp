@@ -28,46 +28,44 @@ string trim(const string& str) {
     return str.substr(first, (last - first + 1));
 }
 
-// Function to read movie data from a CSV file
-int main( {
-    ifstream file ("Movies.csv");
-    if (!file.is_open()){
-        cerr <<"Error opening file." << filename << end1;
+// Function to read movie data from a CSV file and return as vector of movie objects
+std::vector<Movie> readMoviesFromCSV(const std::string& filename) {
+    std::ifstream file(filename);
+    std::vector<Movie> movies;
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
         return movies;
     }
 
-    unordered_map<string, Movie> movies;
-
-    string line;
+    std::string line;
     while (getline(file, line)) {
-        stringstream ss(line);
-        vector<string> tokens;
-        string token;
+        std::stringstream ss(line);
+        std::vector<std::string> tokens;
+        std::string token;
         while (getline(ss, token, ',')) {
             tokens.push_back(token);
         }
-        if (tokens.size() == 7) { 
+        if (tokens.size() == 7) {
             Movie movie;
             movie.name = trim(tokens[0]);
             movie.genre = trim(tokens[1]);
             movie.language = trim(tokens[2]);
             movie.actorFirst = trim(tokens[3]);
             movie.actorLast = trim(tokens[4]);
-            movie.movieDuration = stoi(trim(tokens[5]));
-            movie.releaseYear = stoi(trim(tokens[6]));
+            movie.movieDuration = std::stoi(trim(tokens[5]));
+            movie.releaseYear = std::stoi(trim(tokens[6]));
 
-            //  to transform movie title to lowercase for case-insensitive search
-            transform(movie.name.begin(), movie.name.end(), movie.name.begin(), ::tolower);
+            std::transform(movie.name.begin(), movie.name.end(), movie.name.begin(), ::tolower);
 
-            movies[movie.name] = movie;
+            movies.push_back(movie);
         }
     }
 
-
     file.close();
     return movies;
+}
 
-})
 
 //  a function to search for movies by title in a hash map
 void searchByTitle(const unordered_map<string, Movie>& movies, const string& title) {
@@ -108,7 +106,8 @@ void searchByGenre(const unordered_map<string, Movie>& movies, const string& gen
         cout << "No movies found in genre '" << genre << "'." << endl;
     }
 }
-
+// Old
+/**
 int main() {
     // Read movies from CSV file
     unordered_map<string, Movie> movies = readMoviesFromCSV("Movies.csv");
@@ -139,4 +138,4 @@ int main() {
     }
 
     return 0;
-}
+}*/

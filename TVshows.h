@@ -16,7 +16,7 @@ class TVshows {
     string showGenre;
     string actorFirst;
     string actorLast;
-    vector<int> seasonsCount;
+    int seasonsCount;
     vector<int> episodesCount;
     vector<string> genre;
 
@@ -35,7 +35,7 @@ class TVshows {
         return episodesCount.size(); //We want to return the total number of episodes
     }
 
-    void selectEpisode(int seasonNumber, int episodeNumber) {}
+    //void selectEpisode(int seasonNumber, int episodeNumber) {}
 
     void selectSeason(int seasonNumber) {}
 
