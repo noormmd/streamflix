@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+//#include "catch.hpp" // Create catch.hpp file for testing
 #include Movies.h
 #include TVshows.h
 #include Users.h
