@@ -127,6 +127,8 @@ string filename;
   bool running = true;
   while (running)
   {
+    cout << "What file will you be using? Enter it here:" << endl;
+    cin >> filename;
     cout << "      WELCOME TO STREAMFLIX" << endl;
     cout << "************************************" << endl;
     cout << "*           MAIN MENU              *" << endl;
