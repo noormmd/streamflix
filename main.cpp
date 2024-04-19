@@ -124,12 +124,6 @@ void displayPlanDetails(const string &plan)
 int main() {
 string filename;
 
-// Enables user to independantly input CSV data file name to be used in accessing movies and TV shows
-  cout << "Enter the data file name to access movies and TV shows" << endl;
-  cin >> filename;
-  cin.ignore();
-
-
   bool running = true;
   while (running)
   {
@@ -182,6 +176,11 @@ string filename;
           cout << "Select a movie from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY MOVIES
+
+           // After displaying ask whether user would like to search for a movie
+          cout << "Looking for a particular movie? Search:" << endl;
+          cout << "Type the category you'd like to search for " << endl;
+
         }
         else
         {
@@ -193,7 +192,13 @@ string filename;
           cout << "Select a movie or TV show from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY TV SHOWS AND MOVIES
-          readShowsFromCSV(filename);
+          //readShowsFromCSV(filename);
+
+          // After displaying ask whether user would like to search for a TV show
+          cout << "Looking for a particular show? Search:" << endl;
+          cout << "Type the category you'd like to search for " << endl;
+
+
         }
       }
       break;
@@ -205,5 +210,6 @@ string filename;
       cout << "Invalid choice. Please choose again." << endl;
     }
   }
+  running = false;
   return 0;
 }
