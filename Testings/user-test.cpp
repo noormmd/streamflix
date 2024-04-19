@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "Users.h" // Assuming this is the header file containing the User class
-#include "Plan.h" // Assuming this is the header file containing the Plan class
+
 
 
 TEST_CASE("User Class Test Cases") {
