@@ -1,59 +1,78 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <unordered_map>
+#include <algorithm> 
 
 using namespace std;
 
-// here is the structure for a TV show
+// Structure for TV show
 struct TVShow {
     string name;
-    string genre;
+    string genres; 
     string language;
     int releaseYear;
     int season;
+
+
+    // Constructor to initialize the TV show
+    TVShow(string name, string genres, string language, int releaseYear, int season) :
+        name(name), genres(genres), language(language), releaseYear(releaseYear), season(season) {}
 };
 
-// this is the Function to compare TVShows based on release year
-bool compareByReleaseYear(const TVShow& a, const TVShow& b) {
-    return a.releaseYear < b.releaseYear;
+/**
+// Function to trim leading and trailing whitespace
+string trim(const string& str) {
+    size_t first = str.find_first_not_of(" \t");
+    if (string::npos == first) {
+        return str;
+    }
+    size_t last = str.find_last_not_of(" \t");
+    return str.substr(first, (last - first + 1));
 }
+*/
 
-// here we can find the bubble sort algorithm to sort TVShows based on release year
-void bubbleSort(vector<TVShow>& shows) {
-    int n = shows.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (compareByReleaseYear(shows[j], shows[j + 1])) {
-                swap(shows[j], shows[j + 1]);
+std::vector<TVShow> readShowsFromCSV(const std::string& filename) {
+    std::ifstream file(filename);
+    std::vector<TVShow> tvShows;
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return tvShows;
+    }
+
+    std::string line;
+    getline(file, line);
+    while (getline(file, line)) {
+        std::stringstream ss(line);
+        std::string name, genres, language, releaseYearStr, seasonStr;
+        getline(ss, name, ',');
+        getline(ss, genres, ',');
+        getline(ss, language, ',');
+        getline(ss, releaseYearStr, ',');
+        getline(ss, seasonStr, ',');
+
+        // Convert string to integer
+        int releaseYear, season;
+        try {
+            if (!releaseYearStr.empty() && !seasonStr.empty()) {
+                releaseYear = std::stoi(releaseYearStr);
+                season = std::stoi(seasonStr);
+            } else {
+                std::cerr << "Error: Empty value encountered for release year or season." << std::endl;
+                continue; // Skip line
             }
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Error: Invalid integer value encountered in CSV." << std::endl;
+            continue; 
         }
-    }
-}
 
-int main() {
-    // this part is creating a vector to store TV shows
-    vector<TVShow> tvShows;
-
-    // Adding some TV shows to the vector
-    tvShows.push_back({ "Suits", "Drama", "English", 2021, 9 });
-    tvShows.push_back({ "Manifest", "Drama", "English", 2020, 4 });
-    tvShows.push_back({ "Brooklyn", "Comedy", "English", 2015, 1 });
-    tvShows.push_back({ "Sweet Horror", "Horror", "Korean", 2023, 2 });
-    tvShows.push_back({ "The innocent", "Thiller", "Spanish", 2020, 3 });
-
-    // Sort the TV shows using bubble sort based on release year
-    bubbleSort(tvShows);
-
-    // Print the sorted TV shows
-    for (const auto& show : tvShows) {
-        cout << "TV Show: " << show.name << endl;
-        cout << "Genre: " << show.genre << endl;
-        cout << "Language: " << show.language << endl;
-        cout << "Release Year: " << show.releaseYear << endl;
-        cout << "Season: " << show.season << endl;
-        cout << endl;
+        // Create a TVShow object and add it to the vector
+        TVShow show(name, genres, language, releaseYear, season);
+        tvShows.push_back(show);
     }
 
-    return 0;
+    file.close();
+    return tvShows;
 }
