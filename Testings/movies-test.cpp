@@ -4,7 +4,7 @@
 
 TEST_CASE("Test Movie class functionality", "[Movie]")
 {
-    Movie movie(166, 1, "Dune", "Action", "Timothee", "Chalamet");
+    Movie movie(1, 166, "Dune", "Action", "Timothee", "Chalamet");
 
     SECTION("Test getters")
     {
