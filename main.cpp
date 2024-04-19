@@ -22,6 +22,12 @@ bool isValidEmail(const string &email)
 // Function to perform user registration
 void registerUser(const string &username, const string &email, const string &password)
 {
+  if (!isValidEmail(email))
+  {
+    cout << "Invalid email address. Please enter a valid email address." << endl;
+    return; // Exit the function without registering user in
+  }
+  
   // Open the users.csv file
   ofstream file("users.csv", ios::app);
   if (file.is_open())
