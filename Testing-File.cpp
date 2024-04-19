@@ -12,8 +12,8 @@ TEST_CASE("movies", "[movies]")
     Movies testMovies(1, "Title", "actorFirst", "actorLast", "Genre", "Language", "ReleaseYear");
     REQUIRE(testMovies.getMovieID() == 1);
     REQUIRE(testMovies.getMovieName() == "Title");
-    REQUIRE(testMovies.getActorFirst() == "");
-    REQUIRE(testMovies.getActorLast() == "");
+    REQUIRE(testMovies.getActorFirst() == "Fist Name");
+    REQUIRE(testMovies.getActorLast() == "Last Name");
     REQUIRE(testMovies.getMovieType() == "Genre");
     REQUIRE(testMovies.getMovieID() != 1);
     REQUIRE(testMovies.getMovieName() != "Title");
