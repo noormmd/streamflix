@@ -9,6 +9,7 @@
 #include "Users.h"
 #include "Plan.h"
 #include "Movies.cpp"
+#include "tvshow.cpp"
 
 using namespace std;
 
@@ -172,7 +173,7 @@ string showsfilename = "tv-show.csv";
   bool running = true;
   while (running)
   {
-     cout << "What file will you be using for movies? Default is Movies.csv" << endl;
+    cout << "What file will you be using for movies? Default is Movies.csv" << endl;
     cin >> moviesfilename;
     cout << "What file will you be using for shows? Default is tv-shows.csv" << endl;
     cin >> showsfilename;
