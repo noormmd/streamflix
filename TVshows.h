@@ -8,6 +8,24 @@
 
 using namespace std;
 
+
+// Structure for TV show
+struct TVShow {
+    string name;
+    string genres; 
+    string language;
+    int releaseYear;
+    int season;
+
+
+    // Constructor to initialize the TV show
+    TVShow(string name, string genres, string language, int releaseYear, int season) :
+        name(name), genres(genres), language(language), releaseYear(releaseYear), season(season) {}
+};
+
+// Function to read TV shows from CSV file
+std::vector<TVShow> readShowsFromCSV(const std::string& filename);
+
 class TVshows {
     private:
     int episodeDuration;
