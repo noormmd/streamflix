@@ -11,6 +11,24 @@
 
 using namespace std;
 
+// Forward declaration of TVShow structure
+struct TVShow;
+
+// Function to display TV shows from CSV file
+void displayTVShowsFromCSV(const std::string& filename) {
+    // Call the function to read TV shows from the CSV file
+    std::vector<TVShow> shows = readShowsFromCSV(filename);
+
+    // Display the TV shows
+    for (const auto& show : shows) {
+        std::cout << "Name: " << show.name << std::endl;
+        std::cout << "Genres: " << show.genres << std::endl;
+        std::cout << "Language: " << show.language << std::endl;
+        std::cout << "Release Year: " << show.releaseYear << std::endl;
+        std::cout << "Season: " << show.season << std::endl << std::endl;
+    }
+}
+
 // Function to validate email format
 bool isValidEmail(const string &email)
 {
@@ -199,8 +217,8 @@ string filename;
           cout << "------------------------------------" << endl;
           cout << "Select a movie or TV show from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
-          // FUNCTIONALITY TO DISPLAY TV SHOWS AND MOVIES
-          //readShowsFromCSV(filename);
+          // FUNCTIONALITY TO DISPLAY TV SHOWS
+          displayTVShowsFromCSV(filename);
 
           // After displaying ask whether user would like to search for a TV show
           cout << "Looking for a particular show? Search:" << endl;

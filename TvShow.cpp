@@ -1,3 +1,5 @@
+#include "TVshows.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -7,32 +9,8 @@
 
 using namespace std;
 
-// Structure for TV show
-struct TVShow {
-    string name;
-    string genres; 
-    string language;
-    int releaseYear;
-    int season;
 
-
-    // Constructor to initialize the TV show
-    TVShow(string name, string genres, string language, int releaseYear, int season) :
-        name(name), genres(genres), language(language), releaseYear(releaseYear), season(season) {}
-};
-
-/**
-// Function to trim leading and trailing whitespace
-string trim(const string& str) {
-    size_t first = str.find_first_not_of(" \t");
-    if (string::npos == first) {
-        return str;
-    }
-    size_t last = str.find_last_not_of(" \t");
-    return str.substr(first, (last - first + 1));
-}
-*/
-
+// Function to read TV shows from CSV file
 std::vector<TVShow> readShowsFromCSV(const std::string& filename) {
     std::ifstream file(filename);
     std::vector<TVShow> tvShows;
