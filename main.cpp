@@ -9,7 +9,6 @@
 #include "Users.h"
 #include "Plan.h"
 #include "Movies.cpp"
-#include "tvshow.cpp"
 
 using namespace std;
 
@@ -37,7 +36,6 @@ void displayMoviesFromCSV(const std::string &moviesfilename)
 
 // Function to display TV shows from CSV file
 void displayTVShowsFromCSV(const std::string& showsfilename) {
-  const std::string& showsfilename = "tv-shows.csv";
     // Call the function to read TV shows from the CSV file
     std::vector<TVShow> shows = readShowsFromCSV(showsfilename);
 
