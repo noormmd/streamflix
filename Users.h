@@ -37,6 +37,7 @@ public:
    string getSelectedPlan() const {
         return selectedPlan;
     }
+    
 vector<User> readUsersFromCSV(const string& filename) {
     vector<User> users;
     ifstream file(filename);
