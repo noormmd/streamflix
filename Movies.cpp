@@ -20,14 +20,14 @@ string trim(const string& str) {
 }
 
 // Function to read movie data from a CSV file and return as vector of movie objects
-std::vector<Movie> readMoviesFromCSV(const std::string &filename)
+std::vector<Movie> readMoviesFromCSV(const std::string &moviesfilename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(moviesfilename);
     std::vector<Movie> movies;
 
     if (!file.is_open())
     {
-        std::cerr << "Error opening file: " << filename << std::endl;
+        std::cerr << "Error opening file: " << moviesfilename << std::endl;
         return movies;
     }
 

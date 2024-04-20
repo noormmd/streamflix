@@ -36,6 +36,7 @@ void displayMoviesFromCSV(const std::string &moviesfilename)
 
 // Function to display TV shows from CSV file
 void displayTVShowsFromCSV(const std::string& showsfilename) {
+  const std::string& showsfilename = "tv-shows.csv";
     // Call the function to read TV shows from the CSV file
     std::vector<TVShow> shows = readShowsFromCSV(showsfilename);
 
@@ -172,11 +173,12 @@ string showsfilename = "tv-show.csv";
   bool running = true;
   while (running)
   {
-     cout << "What file will you be using for movies? Default is Movies.csv" << endl;
+    /**
+    cout << "What file will you be using for movies? Default is Movies.csv" << endl;
     cin >> moviesfilename;
     cout << "What file will you be using for shows? Default is tv-shows.csv" << endl;
     cin >> showsfilename;
-
+*/
     cout << "      WELCOME TO STREAMFLIX" << endl;
     cout << "************************************" << endl;
     cout << "*           MAIN MENU              *" << endl;

@@ -11,12 +11,13 @@ using namespace std;
 
 
 // Function to read TV shows from CSV file
-std::vector<TVShow> readShowsFromCSV(const std::string& filename) {
-    std::ifstream file(filename);
+std::vector<TVShow> readShowsFromCSV(const std::string& showsfilename) {
+    std::ifstream file(showsfilename);
+
     std::vector<TVShow> tvShows;
 
     if (!file.is_open()) {
-        std::cerr << "Error opening file: " << filename << std::endl;
+        std::cerr << "Error opening file: " << showsfilename << std::endl;
         return tvShows;
     }
 
