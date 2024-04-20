@@ -168,7 +168,7 @@ void displayPlanDetails(const string &plan)
 
 int main() {
 string moviesfilename = "Movies.csv";
-string showsfilename = "tv-show.csv";
+string showsfilename = "tv-shows.csv";
 
   bool running = true;
   while (running)
