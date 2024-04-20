@@ -8,6 +8,7 @@
 #include "TVshows.h"
 #include "Users.h"
 #include "Plan.h"
+#include "Movies.cpp"
 
 using namespace std;
 
@@ -17,13 +18,13 @@ struct TVShow;
 struct Movies;
 
 // Function prototype for readMoviesFromCSV
-std::vector<Movie> readMoviesFromCSV(const std::string &filename);
+std::vector<Movie> readMoviesFromCSV(const std::string &moviesfilename);
 
 // Function to display movies from CSV file
-void displayMoviesFromCSV(const std::string &filename)
+void displayMoviesFromCSV(const std::string &moviesfilename)
 {
     // Call the function to read movies from the CSV file
-    std::vector<Movie> movies = readMoviesFromCSV(filename);
+    std::vector<Movie> movies = readMoviesFromCSV(moviesfilename);
 
     // Display the movies
     for (const auto &movie : movies)
@@ -34,9 +35,9 @@ void displayMoviesFromCSV(const std::string &filename)
 }
 
 // Function to display TV shows from CSV file
-void displayTVShowsFromCSV(const std::string& filename) {
+void displayTVShowsFromCSV(const std::string& showsfilename) {
     // Call the function to read TV shows from the CSV file
-    std::vector<TVShow> shows = readShowsFromCSV(filename);
+    std::vector<TVShow> shows = readShowsFromCSV(showsfilename);
 
     // Display the TV shows
     for (const auto& show : shows) {
@@ -165,13 +166,17 @@ void displayPlanDetails(const string &plan)
 
 
 int main() {
-string filename;
+string moviesfilename = "Movies.csv";
+string showsfilename = "tv-show.csv";
 
   bool running = true;
   while (running)
   {
-    cout << "What file will you be using? Enter it here:" << endl;
-    cin >> filename;
+     cout << "What file will you be using for movies? Default is Movies.csv" << endl;
+    cin >> moviesfilename;
+    cout << "What file will you be using for shows? Default is tv-shows.csv" << endl;
+    cin >> showsfilename;
+
     cout << "      WELCOME TO STREAMFLIX" << endl;
     cout << "************************************" << endl;
     cout << "*           MAIN MENU              *" << endl;
@@ -221,7 +226,7 @@ string filename;
           cout << "Select a movie from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY MOVIES
-          displayMoviesFromCSV(filename);
+          displayMoviesFromCSV(moviesfilename);
            // After displaying ask whether user would like to search for a movie
           cout << "Looking for a particular movie? Search:" << endl;
           cout << "Type the category you'd like to search for " << endl;
@@ -237,7 +242,7 @@ string filename;
           cout << "Select a movie or TV show from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY TV SHOWS
-          displayTVShowsFromCSV(filename);
+          displayTVShowsFromCSV(showsfilename);
 
           // After displaying ask whether user would like to search for a TV show
           cout << "Looking for a particular show? Search:" << endl;
