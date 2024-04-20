@@ -2,20 +2,18 @@
 #include "catch.hpp"
 #include "Users.h" // Assuming this is the header file containing the User class
 
-
-
 TEST_CASE("User Class Test Cases") {
     SECTION("Constructing a User Object") {
-        User user("Rob", "James", "rob@gmail.com", "Rob123");
+        User user("Rob", "rob@gmail.com", "Rob123");
 
-        REQUIRE(user.getFirstname() == "Rob");
-        REQUIRE(user.getLastname() == "James");
+        REQUIRE(user.getUsername() == "Rob");
         REQUIRE(user.getEmail() == "rob@gmail.com");
         REQUIRE(user.getPassword() == "Rob123");
     }
 
     SECTION("Setting and Retrieving Selected Plan") {
-        User user("Abigail", "Smith","abigail@gmail.com", "Abigail123")
+        User user("Tom", "tom@gmail.com", "Tom123");
+
         user.setSelectedPlan("Premium");
         REQUIRE(user.getSelectedPlan() == "Premium");
 
@@ -23,24 +21,22 @@ TEST_CASE("User Class Test Cases") {
         REQUIRE(user.getSelectedPlan() == "Standard");
     }
 
-
     SECTION("Updating Email") {
-        User user("Lucy","Wright","lucy@gmail.com","Lucy123");
+        User user("Lucy", "lucye@gmail.com", "Lucy123");
 
         // Update email
-        user.setEmail("lucy@gmail.com");
-        REQUIRE(user.getEmail() == "lucy@gmail.com");
+        user.setEmail("lucyw@gmail.com");
+        REQUIRE(user.getEmail() == "lucyw@gmail.com");
     }
 
     SECTION("Changing Password") {
-        User user("Tom", "Lane", "tom@gmail.com", "oldpassword");
+        User user("Abigail", "abigail@gmial.com", "Abigail123");
 
         // Change password
-        user.setPassword("newpassword");
-        REQUIRE(user.getPassword() == "newpassword");
+        user.setPassword("Abigail124");
+        REQUIRE(user.getPassword() == "Abigail124");
     }
 }
-
 // Test cases for reading and writing user information from/to CSV
 TEST_CASE("Read and Write Users to CSV") {
     SECTION("Read Users from CSV") {
@@ -58,11 +54,4 @@ TEST_CASE("Read and Write Users to CSV") {
         REQUIRE(users[0].getPassword() == "Rob123");
         // Add more REQUIRE statements to check other user details
     }
-
-
 }
-
-
-
-
-

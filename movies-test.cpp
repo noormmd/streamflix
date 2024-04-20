@@ -8,7 +8,7 @@ TEST_CASE("Test Movie class functionality", "[Movie]")
 
     SECTION("Test getters")
     {
-        REQUIRE(movie.getMovieID() == "1");
+        REQUIRE(movie.getMovieID() == 1);
         REQUIRE(movie.getMovieName() == "Dune");
         REQUIRE(movie.getActorFirst() == "Timothee");
         REQUIRE(movie.getActorLast() == "Chalamet");
