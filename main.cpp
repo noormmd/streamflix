@@ -15,13 +15,19 @@ using namespace std;
 bool isValidEmail(const string &email)
 {
   // Regular expression for basic email validation
-  const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+  const regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
   return regex_match(email, pattern);
 }
 
 // Function to perform user registration
 void registerUser(const string &username, const string &email, const string &password)
 {
+  if (!isValidEmail(email))
+  {
+    cout << "Invalid email address. Please enter a valid email address." << endl;
+    return; // Exit the function without registering user in
+  }
+  
   // Open the users.csv file
   ofstream file("users.csv", ios::app);
   if (file.is_open())
