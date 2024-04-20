@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include <unordered_map>
 #include <algorithm>
@@ -7,7 +8,6 @@
 
 using namespace std;
 
-// Defining the structure to represent a movie
 struct Movie {
     string name;
     string genre;
@@ -18,7 +18,6 @@ struct Movie {
     int releaseYear;
 };
 
-// Function to trim leading and trailing whitespace from a string
 string trim(const string& str) {
     size_t first = str.find_first_not_of(' ');
     if (string::npos == first) {
@@ -28,11 +27,17 @@ string trim(const string& str) {
     return str.substr(first, (last - first + 1));
 }
 
-// Function to read movie data from a vector of strings (simulating a CSV file)
-unordered_map<string, Movie> readMoviesFromVector(const vector<string>& data) {
+unordered_map<string, Movie> readMoviesFromFile(const string& filePath) {
+    ifstream file(filePath);
     unordered_map<string, Movie> movies;
+    string line;
 
-    for (const string& line : data) {
+    if (!file.is_open()) {
+        cerr << "Error: File could not be opened." << endl;
+        return movies;
+    }
+
+    while (getline(file, line)) {
         stringstream ss(line);
         vector<string> tokens;
         string token;
@@ -48,18 +53,15 @@ unordered_map<string, Movie> readMoviesFromVector(const vector<string>& data) {
             movie.actorLast = tokens[4];
             movie.movieDuration = stoi(tokens[5]);
             movie.releaseYear = stoi(tokens[6]);
-
-            // Transform movie title to lowercase for case-insensitive search
             transform(movie.name.begin(), movie.name.end(), movie.name.begin(), ::tolower);
-
             movies[movie.name] = movie;
         }
     }
 
+    file.close();
     return movies;
 }
 
-// Bubble sort function for vector of Movies
 void bubbleSortMovies(vector<Movie>& movies, bool (*compare)(const Movie&, const Movie&)) {
     bool swapped;
     do {
@@ -73,31 +75,22 @@ void bubbleSortMovies(vector<Movie>& movies, bool (*compare)(const Movie&, const
     } while (swapped);
 }
 
-// Comparator function to sort movies by release year
 bool compareByReleaseYear(const Movie& a, const Movie& b) {
-    return a.releaseYear > b.releaseYear; // Sort in descending order
+    return a.releaseYear > b.releaseYear;
 }
 
 int main() {
-    vector<string> csvData = {
-        "The Shawshank Redemption,Drama,English,Tim,Robbins,142,1994",
-        "The Godfather,Drama,English,Marlon,Brando,175,1972",
-        "The Dark Knight,Action,English,Christian,Bale,152,2008",
-        "12 Angry Men,Drama,English,Henry,Fonda,96,1957"
-    };
+    string filePath = "Movies.csv"; // Specify your CSV file path here
 
-    unordered_map<string, Movie> movies = readMoviesFromVector(csvData);
-
-    // Converting unordered_map to vector to sort
+    unordered_map<string, Movie> movies = readMoviesFromFile(filePath);
     vector<Movie> movieList;
+
     for (const auto& pair : movies) {
         movieList.push_back(pair.second);
     }
 
-    // Sorting movies by release year using bubble sort
     bubbleSortMovies(movieList, compareByReleaseYear);
 
-    // Print sorted movies
     for (const auto& movie : movieList) {
         cout << "Title: " << movie.name << ", Release Year: " << movie.releaseYear << endl;
     }
