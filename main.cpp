@@ -14,6 +14,25 @@ using namespace std;
 // Forward declaration of TVShow structure
 struct TVShow;
 
+struct Movies;
+
+// Function prototype for readMoviesFromCSV
+std::vector<Movie> readMoviesFromCSV(const std::string &filename);
+
+// Function to display movies from CSV file
+void displayMoviesFromCSV(const std::string &filename)
+{
+    // Call the function to read movies from the CSV file
+    std::vector<Movie> movies = readMoviesFromCSV(filename);
+
+    // Display the movies
+    for (const auto &movie : movies)
+    {
+        movie.printDetails();
+        cout << endl;
+    }
+}
+
 // Function to display TV shows from CSV file
 void displayTVShowsFromCSV(const std::string& filename) {
     // Call the function to read TV shows from the CSV file
@@ -202,7 +221,7 @@ string filename;
           cout << "Select a movie from the following to watch:" << endl;
           cout << "------------------------------------" << endl;
           // FUNCTIONALITY TO DISPLAY MOVIES
-
+          displayMoviesFromCSV(filename);
            // After displaying ask whether user would like to search for a movie
           cout << "Looking for a particular movie? Search:" << endl;
           cout << "Type the category you'd like to search for " << endl;

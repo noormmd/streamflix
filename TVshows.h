@@ -18,7 +18,7 @@ struct TVShow {
     int season;
 
 
-    // Constructor to initialize the TV show
+    // Constructor to initialise the TV show
     TVShow(string name, string genres, string language, int releaseYear, int season) :
         name(name), genres(genres), language(language), releaseYear(releaseYear), season(season) {}
 };

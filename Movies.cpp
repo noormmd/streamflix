@@ -1,3 +1,5 @@
+#include "Movies.h" // Including the header file for movies
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -6,17 +8,6 @@
 #include <algorithm> 
 
 using namespace std;
-
-// Defining the structure to represent a movie
-struct Movie {
-    string name;
-    string genre;
-    string language;
-    string actorFirst;
-    string actorLast;
-    int movieDuration;
-    int releaseYear;
-};
 
 // Function to trim leading and trailing whitespace from a string
 string trim(const string& str) {
@@ -29,35 +20,36 @@ string trim(const string& str) {
 }
 
 // Function to read movie data from a CSV file and return as vector of movie objects
-std::vector<Movie> readMoviesFromCSV(const std::string& filename) {
+std::vector<Movie> readMoviesFromCSV(const std::string &filename)
+{
     std::ifstream file(filename);
     std::vector<Movie> movies;
 
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Error opening file: " << filename << std::endl;
         return movies;
     }
 
     std::string line;
-    while (getline(file, line)) {
+    while (getline(file, line))
+    {
         std::stringstream ss(line);
         std::vector<std::string> tokens;
         std::string token;
-        while (getline(ss, token, ',')) {
+        while (getline(ss, token, ','))
+        {
             tokens.push_back(token);
         }
-        if (tokens.size() == 7) {
-            Movie movie;
-            movie.name = trim(tokens[0]);
-            movie.genre = trim(tokens[1]);
-            movie.language = trim(tokens[2]);
-            movie.actorFirst = trim(tokens[3]);
-            movie.actorLast = trim(tokens[4]);
-            movie.movieDuration = std::stoi(trim(tokens[5]));
-            movie.releaseYear = std::stoi(trim(tokens[6]));
+        if (tokens.size() == 7)
+        {
+             // Convert string tokens to integers
+            int duration = std::stoi(tokens[0]);
+            int id = std::stoi(tokens[1]);
+            int releaseYear = std::stoi(tokens[6]);
 
-            std::transform(movie.name.begin(), movie.name.end(), movie.name.begin(), ::tolower);
-
+            // Create Movie object
+            Movie movie(duration, id, tokens[2], tokens[3], tokens[4], tokens[5]);
             movies.push_back(movie);
         }
     }
@@ -66,8 +58,7 @@ std::vector<Movie> readMoviesFromCSV(const std::string& filename) {
     return movies;
 }
 
-
-//  a function to search for movies by title in a hash map
+//  Function to search for movies by title in a hash map
 void searchByTitle(const unordered_map<string, Movie>& movies, const string& title) {
     string searchTerm = trim(title);
     transform(searchTerm.begin(), searchTerm.end(), searchTerm.begin(), ::tolower);
@@ -75,30 +66,30 @@ void searchByTitle(const unordered_map<string, Movie>& movies, const string& tit
     auto it = movies.find(searchTerm);
     if (it != movies.end()) {
         cout << "Movie found: " << endl;
-        cout << "Title: " << it->second.name << endl;
-        cout << "Genre: " << it->second.genre << endl;
-        cout << "Language: " << it->second.language << endl;
-        cout << "Release Year: " << it->second.releaseYear << endl;
+        cout << "Title: " << it->second.getMovieName() << endl;
+        cout << "Genre: " << it->second.getMovieGenre() << endl;
+        cout << "Language: " << it->second.getMovieLanguage() << endl;
+        cout << "Release Year: " << it->second.getReleaseYear() << endl;
     } else {
         cout << "Movie with title '" << title << "' not found." << endl;
     }
 }
 
-// a function to search for movies by genre in a hash map
+// Function to search for movies by genre in a hash map
 void searchByGenre(const unordered_map<string, Movie>& movies, const string& genre) {
     string searchTerm = trim(genre);
     transform(searchTerm.begin(), searchTerm.end(), searchTerm.begin(), ::tolower);
 
     bool found = false;
     for (const auto& pair : movies) {
-        string movieGenreLower = pair.second.genre;
+        string movieGenreLower = pair.second.getMovieGenre();
         transform(movieGenreLower.begin(), movieGenreLower.end(), movieGenreLower.begin(), ::tolower);
         if (movieGenreLower == searchTerm) {
             cout << "Movie found: " << endl;
-            cout << "Title: " << pair.second.name << endl;
-            cout << "Genre: " << pair.second.genre << endl;
-            cout << "Language: " << pair.second.language << endl;
-            cout << "Release Year: " << pair.second.releaseYear << endl;
+            cout << "Title: " << pair.second.getMovieName() << endl;
+            cout << "Genre: " << pair.second.getMovieGenre() << endl;
+            cout << "Language: " << pair.second.getMovieLanguage() << endl;
+            cout << "Release Year: " << pair.second.getReleaseYear() << endl;
             found = true;
         }
     }
@@ -106,7 +97,7 @@ void searchByGenre(const unordered_map<string, Movie>& movies, const string& gen
         cout << "No movies found in genre '" << genre << "'." << endl;
     }
 }
-// Old
+
 /**
 int main() {
     // Read movies from CSV file

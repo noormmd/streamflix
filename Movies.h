@@ -17,11 +17,14 @@ private:
     string movieGenre;
     string actorFirst;
     string actorLast;
+string releaseyear;
+string language;
 
 public:
-    Movie(int movieDuration, int MovieID, string movieName, string movieGenre, string actorFirst, string actorLast)
-        : movieDuration(movieDuration), movieID(movieID), movieName(movieName), movieGenre(movieGenre),
-          actorFirst(actorFirst), actorLast(actorLast) {}
+    // Constructor
+    Movie(int duration, int id, const string& name, const string& genre, const string& first, const string& last)
+        : movieDuration(duration), movieID(id), movieName(name), movieGenre(genre),
+          actorFirst(first), actorLast(last) {}
 
     string getMovieID() const
     {
@@ -33,6 +36,15 @@ public:
         return movieName;
     };
 
+string getReleaseYear() const
+    {
+        return releaseyear;
+    };
+
+    string getMovieLanguage() const
+    {
+        return language;
+    };
     string getActorFirst() const
     {
         return actorFirst;
@@ -43,13 +55,15 @@ public:
 
         return actorLast;
     };
+
     int getMovieDuration() const
     {
         return movieDuration;
-    }
+    };
+
       string getMovieGenre() const {
         return movieGenre;
-    }
+    };
     
     void printDetails() const {
         cout << "Movie ID: " << getMovieID() << endl
