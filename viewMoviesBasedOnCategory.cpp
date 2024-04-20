@@ -7,7 +7,7 @@
 #include <algorithm>
 
 using namespace std;
-
+//TRY ADDING GETTERS
 // Function to display movies from CSV file
 void displayMoviesFromCSV(const string& filename) {
     // Call the function to read movies from the CSV file
