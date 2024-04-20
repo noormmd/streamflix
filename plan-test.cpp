@@ -4,7 +4,7 @@
 
 TEST_CASE("Plan Display Test") {
     // Create a Plan object with sample data
-    vector<string> planOptions = {"Basic", "Premium"};
+    vector<string> planOptions = {"Standard", "Premium"};
     Plan plan(planOptions, true);
 
     SECTION("Valid Plan Display") {
