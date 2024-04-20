@@ -24,7 +24,7 @@ struct TVShow {
 };
 
 // Function to read TV shows from CSV file
-std::vector<TVShow> readShowsFromCSV(const std::string& filename);
+std::vector<TVShow> readShowsFromCSV(const std::string& showsfilename);
 
 class TVshows {
     private:
