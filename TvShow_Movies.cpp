@@ -93,7 +93,7 @@ public:
     }
 };
 
-int main() {
+int movieshashtable2() {
     MovieDatabase Movies;
 
     // Set the plan type (true for premium, false for basic)

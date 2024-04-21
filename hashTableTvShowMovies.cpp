@@ -104,7 +104,7 @@ public:
     }
 };
 
-int main() {
+int moviesHashtable() {
     MovieDatabase Movies;
 
     // here is set plan type based on user selection (will be true for premium, and false for basic)

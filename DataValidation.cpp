@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main() {
+int loginandregister() {
     system("cls"); // Clean the screen
     system("color f0"); // Change the color of the text and background
 

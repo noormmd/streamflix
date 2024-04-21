@@ -1,8 +1,9 @@
-#include "Movies.h" 
+#include "Movies.h"
 #include <iostream>
 #include <vector>
+#include "Movies.cpp"
 
-int main() {
+int testformovies() {
     // Read movies from CSV file
     std::vector<Movie> movies = readMoviesFromCSV("Movies.csv");
 

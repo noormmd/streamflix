@@ -28,7 +28,7 @@ int parseDurationToMinutes(const string &durationString) {
     return hours * 60 + minutes;
 }
 
-int main() {
+int searchformovies() {
     // Call the function to display movies from CSV file
     displayMoviesFromCSV("Movies.csv");
 
