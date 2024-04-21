@@ -9,9 +9,9 @@ int main() {
     std::cout << "Testing user registration function..." << std::endl;
 
     // Test case 1: Valid registration
-    std::string validUsername = "testuser";
-    std::string validEmail = "test@example.com";
-    std::string validPassword = "password123";
+    std::string validUsername = "Rob";
+    std::string validEmail = "rob@gmail.com";
+    std::string validPassword = "Rob123";
     std::cout << "Test case 1: Valid registration" << std::endl;
     registerUser(validUsername, validEmail, validPassword);
 
