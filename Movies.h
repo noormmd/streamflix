@@ -22,9 +22,9 @@ string language;
 
 public:
     // Constructor
-    Movie(int duration, int id, const string& name, const string& genre, const string& first, const string& last)
+    Movie(int duration, int id, const string& name, const string& genre, const string& first, const string& last, const string& release, const string& lang)
         : movieDuration(duration), movieID(id), movieName(name), movieGenre(genre),
-          actorFirst(first), actorLast(last) {}
+          actorFirst(first), actorLast(last), releaseYear(release), language(lang) {}
 
     string getMovieID() const
     {
@@ -38,7 +38,7 @@ public:
 
 string getReleaseYear() const
     {
-        return releaseyear;
+        return release;
     };
 
     string getMovieLanguage() const
@@ -70,7 +70,9 @@ string getReleaseYear() const
              << "Movie Name: " << getMovieName() << endl
              << "Genre: " << getMovieGenre() << endl
              << "Starring: " << getActorFirst() << " " << getActorLast() << endl
-             << "Duration: " << getMovieDuration() << " minutes" << endl;
+             << "Duration: " << getMovieDuration() << " minutes" << endl
+             << "Release Year: " << getReleaseYear() << endl
+             << "Language: " << getMovieLanguage() << endl;
     }
 };
 #endif

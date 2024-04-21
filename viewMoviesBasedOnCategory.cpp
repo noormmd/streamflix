@@ -5,15 +5,16 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
 
 // Forward declaration of functions
 vector<Movie> readMoviesFromCSV(const string& filename);
-void displayMoviesFromCSV(const string& filename);
-void findAndDisplayMovie(const string& genre, const string& language, const string& actorFirst, const string& actorLast);
+void displayMoviesFromCSV(const vector<Movie>& movies);
+void displayMatchingMovies(const vector<Movie>& movies, const string& desiredGenre, const string& desiredLanguage, const string& desiredActorFirst, const string& desiredActorLast);
 
-// Function to convert duration string (e.g., "2h 28mins") to minutes
+// Function to convert duration string (e.g., "2h 28min") to minutes
 int parseDurationToMinutes(const string &durationString) {
     int hours = 0, minutes = 0;
     stringstream ss(durationString);
@@ -28,39 +29,79 @@ int parseDurationToMinutes(const string &durationString) {
     return hours * 60 + minutes;
 }
 
+// Function to trim leading and trailing whitespace from a string
+std::string trim(const std::string& str) {
+    size_t start = str.find_first_not_of(" \t\n");
+    size_t end = str.find_last_not_of(" \t\n");
+    if (start == std::string::npos || end == std::string::npos) {
+        return ""; // No non-whitespace characters found
+    }
+    return str.substr(start, end - start + 1);
+}
+
+
 int main() {
-    // Call the function to display movies from CSV file
-    displayMoviesFromCSV("Movies.csv");
+    // Call the function to read movies from CSV file
+    vector<Movie> movies = readMoviesFromCSV("Movies.csv");
 
-    // Ask user for preferences
-    string genre, language, actorFirst, actorLast;
-    cout << "Enter your preferences to find a movie:" << endl;
-    cout << "Genre: ";
-    getline(cin, genre);
-    cout << "Language: ";
-    getline(cin, language);
-    cout << "Actor's First Name: ";
-    getline(cin, actorFirst);
-    cout << "Actor's Last Name: ";
-    getline(cin, actorLast);
+    // Display movies from CSV file
+    displayMoviesFromCSV(movies);
 
-    // Call function to find and display matching movie
-    findAndDisplayMovie(genre, language, actorFirst, actorLast);
+    // Prompt the user for input
+    cout << "Enter the desired genre: ";
+    string desiredGenre;
+    getline(cin, desiredGenre);
+
+    cout << "Enter the desired language: ";
+    string desiredLanguage;
+    getline(cin, desiredLanguage);
+
+    cout << "Enter the first name of the actor: ";
+    string desiredActorFirst;
+    getline(cin, desiredActorFirst);
+    desiredActorFirst = trim(desiredActorFirst);
+
+    cout << "Enter the last name of the actor: ";
+    string desiredActorLast;
+    getline(cin, desiredActorLast);
+    desiredActorLast = trim(desiredActorLast);
+
+    // Display matching movies
+    displayMatchingMovies(movies, desiredGenre, desiredLanguage, desiredActorFirst, desiredActorLast);
 
     return 0;
 }
 
 // Function to display movies from CSV file
-void displayMoviesFromCSV(const string& filename) {
-    // Call the function to read movies from the CSV file
-    vector<Movie> movies = readMoviesFromCSV(filename);
-
-    // Display the movies
+void displayMoviesFromCSV(const vector<Movie>& movies) {
+    cout << "Movies from CSV file:" << endl;
     for (const auto& movie : movies) {
-        cout << "Movie Name: " << movie.getMovieName() << endl;
-        cout << "Genre: " << movie.getMovieGenre() << endl;
-        cout << "Language: " << movie.getMovieLanguage() << endl;
-        cout << "Duration: " << movie.getMovieDuration() << " minutes" << endl << endl;
+        movie.printDetails();
+        cout << endl;
+    }
+}
+
+// Function to display movies matching the user's criteria
+void displayMatchingMovies(const vector<Movie>& movies, const string& desiredGenre, const string& desiredLanguage, const string& desiredActorFirst, const string& desiredActorLast) {
+    vector<Movie> matchingMovies;
+
+    for (const auto& movie : movies) {
+        if (movie.getMovieGenre() == desiredGenre &&
+            movie.getMovieLanguage() == desiredLanguage &&
+            movie.getActorFirst() == desiredActorFirst &&
+            movie.getActorLast() == desiredActorLast) {
+            matchingMovies.push_back(movie);
+        }
+    }
+
+    if (matchingMovies.empty()) {
+        cout << "No movie found matching the specified criteria." << endl;
+    } else {
+        cout << "Matching Movies: " << endl;
+        for (const auto& movie : matchingMovies) {
+            movie.printDetails();
+            cout << endl;
+        }
     }
 }
 
@@ -96,7 +137,7 @@ vector<Movie> readMoviesFromCSV(const string& filename) {
             string releaseYear = fields[7];
 
             // Create a Movie object and add it to the vector
-            Movie movie(movieID, movieName, movieGenre, actorFirst, actorLast, movieDuration, language, releaseYear);
+            Movie movie(movieDuration, movieID, movieName, movieGenre, actorFirst, actorLast);
             movies.push_back(movie);
         }
     }
