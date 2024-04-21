@@ -1,6 +1,6 @@
-#define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
-#include "catch.hpp" // Include the Catch2 framework
-#include "Movies.h" // Include your movie-related headers
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+#include "Movies.h" 
 #include "Movies.cpp" // Include the implementation file
 
 TEST_CASE("Search by title") {

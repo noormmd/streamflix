@@ -2,39 +2,50 @@
 #include "catch.hpp"
 #include "Plan.h"
 
-TEST_CASE("Plan Display Test") {
-    // Create a Plan object with sample data
-    vector<string> planOptions = {"Standard", "Premium"};
-    Plan plan(planOptions, true);
+TEST_CASE("Plan Class Test Cases") {
+    SECTION("Constructing a Plan Object") {
+        vector<string> options = { "Standard", "Premium"};
+        Plan plan(9.99, options, true);
 
-    SECTION("Valid Plan Display") {
-        // Test displaying an existing plan
-        stringstream output;
-        stringstream expectedOutput;
-        expectedOutput << "Plan Name: Basic" << endl;
-        expectedOutput << "Available: Yes" << endl;
-
-        // Redirect cout to a stringstream to capture output
-        streambuf* oldCout = cout.rdbuf(output.rdbuf());
-        plan.displayPlan("Basic");
-        cout.rdbuf(oldCout); // Restore cout
-
-        // Compare actual output with expected output
-        REQUIRE(output.str() == expectedOutput.str());
+        REQUIRE(plan.totalPrice(1) == 9.99f);
+        REQUIRE(plan.isAvailable() == true);
     }
 
-    SECTION("Invalid Plan Display") {
-        // Test displaying a non-existent plan
-        stringstream output;
-        stringstream expectedOutput;
-        expectedOutput << "Plan not found." << endl;
+    SECTION("Calculating Total Price") {
+        vector<string> options = {"Standard", "Premium"};
+        Plan plan(9.99, options, true);
 
-        // Redirect cout to a stringstream to capture output
-        streambuf* oldCout = cout.rdbuf(output.rdbuf());
-        plan.displayPlan("Standard"); // Assuming "Standard" plan does not exist
-        cout.rdbuf(oldCout); // Restore cout
+        // Total price for 6-month subscription
+        REQUIRE(plan.totalPrice(6) == Approx(59.94).margin(0.01));
 
-        // Compare actual output with expected output
-        REQUIRE(output.str() == expectedOutput.str());
+        // Total price for 0-month subscription (edge case)
+        REQUIRE(plan.totalPrice(0) == 0.0f);
+    }
+
+    SECTION("Check Plan Availability") {
+        vector<string> options = {"Basic", "Standard", "Premium"};
+        Plan plan(9.99, options, true);
+
+        REQUIRE(plan.isAvailable() == true);
+
+        // Change plan availability
+        // plan.setAvailability(false); // Uncomment if setAvailability is implemented
+        // REQUIRE(plan.isAvailable() == false);
+    }
+
+    SECTION("Edge Case: Empty Plan Options") {
+        vector<string> options; // Empty plan options
+        Plan plan(0.0, options, true);
+
+        // Total price for 12-month subscription with empty plan options
+        REQUIRE(plan.totalPrice(12) == Approx(0.0).margin(0.01));
+    }
+
+    SECTION("Edge Case: Negative Price") {
+        vector<string> options = {"Standard", "Premium"};
+        Plan plan(-5.0, options, true);
+
+        // Total price for 3-month subscription with negative price
+        REQUIRE(plan.totalPrice(3) == Approx(-15.0).margin(0.01));
     }
 }
