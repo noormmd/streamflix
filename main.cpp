@@ -49,6 +49,34 @@ void displayTVShowsFromCSV(const std::string& showsfilename) {
     }
 }
 
+void bubbleSortMovies(vector<Movie>& movies) {
+    bool swapped;
+    do {
+        swapped = false;
+        for (size_t i = 0; i < movies.size() - 1; i++) {
+            if (movies[i].getMovieName() > movies[i + 1].getMovieName()) {
+                swap(movies[i], movies[i + 1]);
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+
+void searchMovieByTitle(const vector<Movie>& movies, const string& title) {
+    bool found = false;
+    for (const auto& movie : movies) {
+        if (movie.getMovieName() == title) {
+            cout << "Movie found: " << endl;
+            movie.printDetails();
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Movie not found." << endl;
+    }
+}
+
 // Function to validate email format
 bool isValidEmail(const string &email)
 {
@@ -168,11 +196,13 @@ void displayPlanDetails(const string &plan)
 int main() {
 string moviesfilename = "Movies.csv";
 string showsfilename = "tv-shows.csv";
+    // Read and sort movies
+    vector<Movie> movies = readMoviesFromCSV(moviesfilename);
+    bubbleSortMovies(movies);
 
   bool running = true;
   while (running)
   {
- 
     cout << "      WELCOME TO STREAMFLIX" << endl;
     cout << "************************************" << endl;
     cout << "*           MAIN MENU              *" << endl;
