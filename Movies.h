@@ -17,8 +17,8 @@ private:
     string movieGenre;
     string actorFirst;
     string actorLast;
-string releaseyear;
-string language;
+    string releaseyear;
+    string language;
 
 public:
     // Constructor
@@ -36,7 +36,7 @@ public:
         return movieName;
     };
 
-string getReleaseYear() const
+    string getReleaseYear() const
     {
         return releaseyear;
     };
@@ -65,6 +65,15 @@ string getReleaseYear() const
         return movieGenre;
     };
     
+    void setReleaseYear(const string& year)
+    {
+        releaseyear = year;
+    }
+
+    void setLanguage(const string& lang)
+    {
+        language = lang;
+    }
     void printDetails() const {
         cout << "Movie ID: " << getMovieID() << endl
              << "Movie Name: " << getMovieName() << endl

@@ -13,6 +13,7 @@ using namespace std;
 vector<Movie> readMoviesFromCSV(const string& filename);
 void displayMoviesFromCSV(const vector<Movie>& movies);
 void displayMatchingMovies(const vector<Movie>& movies, const string& desiredGenre, const string& desiredLanguage, const string& desiredActorFirst, const string& desiredActorLast);
+void sortMoviesByReleaseYear(vector<Movie>& movies);
 
 // Function to convert duration string (e.g., "2h 28min") to minutes
 int parseDurationToMinutes(const string &durationString) {
@@ -39,10 +40,12 @@ std::string trim(const std::string& str) {
     return str.substr(start, end - start + 1);
 }
 
-
 int main() {
     // Call the function to read movies from CSV file
     vector<Movie> movies = readMoviesFromCSV("Movies.csv");
+
+    // Sort movies by release year
+    sortMoviesByReleaseYear(movies);
 
     // Display movies from CSV file
     displayMoviesFromCSV(movies);
@@ -83,9 +86,17 @@ void displayMoviesFromCSV(const vector<Movie>& movies) {
 
 // Function to display movies matching the user's criteria
 void displayMatchingMovies(const vector<Movie>& movies, const string& desiredGenre, const string& desiredLanguage, const string& desiredActorFirst, const string& desiredActorLast) {
+    cout << "Desired Genre: " << desiredGenre << endl;
+    cout << "Desired Language: " << desiredLanguage << endl;
+    cout << "Desired Actor First Name: " << desiredActorFirst << endl;
+    cout << "Desired Actor Last Name: " << desiredActorLast << endl;
+    
     vector<Movie> matchingMovies;
 
     for (const auto& movie : movies) {
+        cout << "Checking movie: " << movie.getMovieName() << endl;
+        cout << "Movie Genre: " << movie.getMovieGenre() << ", Language: " << movie.getMovieLanguage() << ", Actor First Name: " << movie.getActorFirst() << ", Actor Last Name: " << movie.getActorLast() << endl;
+        
         if (movie.getMovieGenre() == desiredGenre &&
             movie.getMovieLanguage() == desiredLanguage &&
             movie.getActorFirst() == desiredActorFirst &&
@@ -138,10 +149,25 @@ vector<Movie> readMoviesFromCSV(const string& filename) {
 
             // Create a Movie object and add it to the vector
             Movie movie(movieDuration, movieID, movieName, movieGenre, actorFirst, actorLast);
+            movie.setReleaseYear(releaseyear);
+            movie.setLanguage(language);
             movies.push_back(movie);
         }
     }
 
     file.close();
     return movies;
+}
+
+// Function to sort movies by release year using bubble sort
+void sortMoviesByReleaseYear(vector<Movie>& movies) {
+    int n = movies.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            // Compare release years and swap if needed
+            if (movies[j].getReleaseYear() > movies[j + 1].getReleaseYear()) {
+                swap(movies[j], movies[j + 1]);
+            }
+        }
+    }
 }
