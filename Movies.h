@@ -26,6 +26,8 @@ public:
         : movieDuration(duration), movieID(id), movieName(name), movieGenre(genre),
           actorFirst(first), actorLast(last), releaseYear(release), language(lang) {}
 
+std::vector<Movie> readMoviesFromCSV(const std::string& moviesfilename);
+
     string getMovieID() const
     {
         return to_string(movieID);

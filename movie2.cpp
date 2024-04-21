@@ -79,7 +79,7 @@ bool compareByReleaseYear(const Movie& a, const Movie& b) {
     return a.releaseYear > b.releaseYear;
 }
 
-int main() {
+int bubbleSortSearching() {
     string filePath = "Movies.csv"; // Specify your CSV file path here
 
     unordered_map<string, Movie> movies = readMoviesFromFile(filePath);

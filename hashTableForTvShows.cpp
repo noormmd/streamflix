@@ -32,7 +32,7 @@ struct TVShowEqual {
     }
 };
 
-int main() {
+int showshashtable() {
     // Creating a hash table for TV shows
     unordered_map<TVShow, int, TVShowHash, TVShowEqual> tvShows;
 
