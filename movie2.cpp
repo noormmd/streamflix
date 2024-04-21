@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <algorithm>
 #include <vector>
+#include "movies.cpp"
+#include "Movies.h"
+
 
 using namespace std;
 
@@ -18,7 +21,8 @@ struct Movie {
     int releaseYear;
 };
 
-string trim(const string& str) {
+
+string trimforsearch(const string& str) {
     size_t first = str.find_first_not_of(' ');
     if (string::npos == first) {
         return str;
@@ -42,7 +46,7 @@ unordered_map<string, Movie> readMoviesFromFile(const string& filePath) {
         vector<string> tokens;
         string token;
         while (getline(ss, token, ',')) {
-            tokens.push_back(trim(token));
+            tokens.push_back(trimforsearch(token));
         }
         if (tokens.size() == 7) {
             Movie movie;
