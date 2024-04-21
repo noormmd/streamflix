@@ -38,7 +38,7 @@ public:
         return selectedPlan;
     }
     
-vector<User> readUsersFromCSV(const string& filename) {
+static std::vector<User> readUsersFromCSV(const string& filename) {
     vector<User> users;
     ifstream file(filename);
     string line;
@@ -56,7 +56,7 @@ vector<User> readUsersFromCSV(const string& filename) {
     return users;
 }
 
-void writeUsersToCSV(const string& filename, const vector<User>& users) {
+void writeUsersToCSV(const string& filename, const std::vector<User>& users) {
     ofstream file(filename);
     for (const auto& user : users) {
         file << user.getUsername() << ','
