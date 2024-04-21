@@ -97,36 +97,3 @@ void searchByGenre(const unordered_map<string, Movie>& movies, const string& gen
         cout << "No movies found in genre '" << genre << "'." << endl;
     }
 }
-
-/**
-int main() {
-    // Read movies from CSV file
-    unordered_map<string, Movie> movies = readMoviesFromCSV("Movies.csv");
-
-    // Prompt user to choose search criteria
-    cout << "Choose search criteria:" << endl;
-    cout << "1. Search by title" << endl;
-    cout << "2. Search by genre" << endl;
-    int choice;
-    cin >> choice;
-    cin.ignore(); // Ignore newline character in input buffer
-
-    // Perform search based on user choice
-    if (choice == 1) {
-        // Prompt user to enter the name of the movie to search for
-        cout << "Enter the name of the movie to search for: ";
-        string searchTerm;
-        getline(cin, searchTerm);
-        searchByTitle(movies, searchTerm);
-    } else if (choice == 2) {
-        // Prompt user to enter the genre to search for
-        cout << "Enter the genre of the movie to search for: ";
-        string searchGenre;
-        getline(cin, searchGenre);
-        searchByGenre(movies, searchGenre);
-    } else {
-        cout << "Invalid choice. Please choose 1 or 2." << endl;
-    }
-
-    return 0;
-}*/
